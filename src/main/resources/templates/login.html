@@ -1,0 +1,59 @@
+<html>
+<body>
+
+<script>
+    async function login(event) {
+        event.preventDefault();
+
+        const username = document.querySelector('#username').value;
+        const password = document.querySelector('#password').value;
+
+        const response = await fetch('http://localhost:8080/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                username,
+                password
+            })
+        });
+
+        if (response.ok) {
+            const token = await response.text(); // Changez ici pour response.text()
+            localStorage.setItem('token', token);
+            await getPosts();
+        } else {
+            console.error("Login failed");
+            // Gérer l'échec de la connexion
+        }
+    }
+    async function getPosts() {
+        const token = localStorage.getItem('token');
+
+        const response = await fetch('http://localhost:8080/api/posts', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            const posts = await response.json();
+            console.log(posts);
+        } else {
+            console.error("Failed to fetch posts");
+            // Gérer l'échec de la récupération des posts
+        }
+    }
+</script>
+
+<form onsubmit="login(event)">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

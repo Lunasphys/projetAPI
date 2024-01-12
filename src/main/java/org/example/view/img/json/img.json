@@ -1,0 +1,29 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "authorId": 123,
+      "url": "./anime1.png"
+    },
+    {
+      "id": 2,
+      "authorId": 123,
+      "url": "./anime2.png"
+    },
+    {
+      "id": 3,
+      "authorId": 321,
+      "url": "./chat1.jpg"
+    },
+    {
+      "id": 4,
+      "authorId": 321,
+      "url": "./chat2.jpg"
+    },
+    {
+      "id": 3,
+      "authorId": 777,
+      "url": "./chat3.jpg"
+    }
+  ]
+}
